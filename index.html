@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>بصمتي لوطني — جمعية فتاة الخليج</title>
+<meta name="description" content="مبادرة جمعية فتاة الخليج لليوم الوطني السعودي ٩٦ — اترك بصمتك في خريطة وطنك وشاركنا عباراتك ورؤيتك لوطن مزدهر.">
+<meta property="og:title" content="بصمتي لوطني — جمعية فتاة الخليج">
+<meta property="og:description" content="مبادرة مديرة الروضة ملاك المهاجري لليوم الوطني السعودي ٩٦">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#F5EFE3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ══════════ المشهد الخلفي ══════════ -->
+  <div class="scene" aria-hidden="true"></div>
+  <div class="sadu" aria-hidden="true"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <!-- ══════════ الترويسة ══════════ -->
+  <header class="hdr">
+    <div class="hdr-col hdr-left">
+      <img class="logo-moe" id="logo-moe"
+           src="assets/img/logo-moe.png"
+           data-fallback="assets/img/logo-moe.svg"
+           alt="وزارة التعليم">
+    </div>
+
+    <div class="hdr-col hdr-center">
+      <img class="logo-kg" id="logo-kg"
+           src="assets/img/logo-kindergarten.png"
+           data-fallback="assets/img/logo-kindergarten.svg"
+           alt="جمعية فتاة الخليج — مركز الطفولة المبكرة">
+      <div class="hdr-name">
+        <p class="hdr-org">جمعية فتاة الخليج</p>
+        <p class="hdr-sub">روضة الأطفال النموذجية</p>
+      </div>
+    </div>
+
+    <div class="hdr-col hdr-right">
+      <img class="logo-nd" id="logo-nd"
+           src="assets/img/logo-nationalday.png"
+           data-fallback="assets/img/logo-nationalday.svg"
+           alt="عزّنا بطبعنا — اليوم الوطني السعودي ٩٦">
+      <button class="ico-btn" id="music-toggle" type="button" aria-pressed="false" title="الموسيقى">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-music">
+          <path d="M9 18V5l10-2v13"/>
+          <circle cx="6.5" cy="18" r="2.6"/>
+          <circle cx="16.5" cy="16" r="2.6"/>
+          <line class="ico-slash" x1="3" y1="21" x2="21" y2="3"/>
+        </svg>
+        <span class="sr">تشغيل الموسيقى أو إيقافها</span>
+      </button>
+      <button class="ico-btn" id="sound-toggle" type="button" aria-pressed="true" title="المؤثرات الصوتية">
+        <span aria-hidden="true">♪</span><span class="sr">كتم المؤثرات الصوتية أو تشغيلها</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══════════ المسرح ══════════ -->
+  <main class="stage" id="stage">
+
+    <!-- ───────── شاشة ١: البداية ───────── -->
+    <section class="view is-on" id="v-home" aria-label="البداية">
+      <div class="view-in home">
+        <h1 class="display">بصمتي لوطني</h1>
+        <p class="display-sub">بصمتك اليوم .. أثرٌ في وطننا</p>
+
+        <div class="field-row">
+          <div class="input-wrap">
+            <input class="input" id="visitor-name" type="text" maxlength="20"
+                   autocomplete="off" placeholder="اكتب اسمك هنا" enterkeyhint="go"
+                   aria-label="اكتب اسمك هنا">
+            <svg class="input-ico" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/>
+            </svg>
+          </div>
+          <button class="btn btn-solid btn-lg" id="btn-begin" type="button">
+            <span class="btn-arrow" aria-hidden="true">←</span> ابدأ
+          </button>
+        </div>
+        <p class="hint" id="name-hint">الاسم الأول فقط — سيظهر بجانب بصمتك على الخريطة</p>
+
+        <div class="home-links">
+          <button class="ghost-link" id="to-wall" type="button">جدار المشاركات</button>
+          <span class="dot-sep" aria-hidden="true"></span>
+          <button class="ghost-link" id="to-about" type="button">عن روضتنا</button>
+        </div>
+
+        <p class="home-credit">مبادرة مديرة الروضة &mdash; <strong>ملاك المهاجري</strong></p>
+      </div>
+    </section>
+
+    <!-- ───────── شاشة ٢: اضغط بصمتك ───────── -->
+    <section class="view" id="v-press" aria-label="اضغط بصمتك" hidden>
+      <div class="view-in press">
+        <div class="view-head">
+          <svg class="emblem" viewBox="0 0 64 60" aria-hidden="true">
+            <path d="M32 4c-3 8-3 14-1 20-4-3-8-4-12-3 4 3 7 7 9 12-5-1-9 0-12 3 5 0 9 2 12 5-3 3-4 7-3 11 3-3 7-5 11-5-1 4 0 8 2 11 2-3 3-7 2-11 4 0 8 2 11 5 1-4 0-8-3-11 3-3 7-5 12-5-3-3-7-4-12-3 2-5 5-9 9-12-4-1-8 0-12 3 2-6 2-12-1-20Z" fill="currentColor"/>
+          </svg>
+          <p class="view-h">بصمتي لوطني</p>
+          <p class="view-s">أترك بصمتك في خريطة وطنك</p>
+        </div>
+        <p class="greet">أهلًا <strong id="greet-name">—</strong></p>
+
+        <button class="pad" id="print-pad" type="button"
+                aria-label="اضغط مع الاستمرار لتسجيل بصمتك">
+          <span class="pad-ring" aria-hidden="true"></span>
+          <span class="pad-rays" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </span>
+          <svg class="pad-fp" viewBox="0 0 100 120" aria-hidden="true"><use href="#fp-glyph"/></svg>
+        </button>
+
+        <p class="hint" id="pad-hint">ضع إصبعك هنا واضغط مع الاستمرار</p>
+        <button class="btn btn-solid" id="btn-done" type="button" disabled>
+          تم <span aria-hidden="true">✓</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ───────── شاشة ٣: الخريطة ───────── -->
+    <section class="view" id="v-map" aria-label="خريطة البصمات" hidden>
+      <div class="view-in map-wrapper">
+        <div class="view-head">
+          <svg class="emblem" viewBox="0 0 64 60" aria-hidden="true">
+            <path d="M32 4c-3 8-3 14-1 20-4-3-8-4-12-3 4 3 7 7 9 12-5-1-9 0-12 3 5 0 9 2 12 5-3 3-4 7-3 11 3-3 7-5 11-5-1 4 0 8 2 11 2-3 3-7 2-11 4 0 8 2 11 5 1-4 0-8-3-11 3-3 7-5 12-5-3-3-7-4-12-3 2-5 5-9 9-12-4-1-8 0-12 3 2-6 2-12-1-20Z" fill="currentColor"/>
+          </svg>
+          <p class="view-h">بصمتي لوطني</p>
+          <p class="view-s">أترك بصمتك في خريطة وطنك</p>
+        </div>
+        <div class="map-view">
+        <div class="map-wrap">
+          <svg id="ksa-map" viewBox="0 0 1000 800" role="img" aria-labelledby="map-title">
+            <title id="map-title">خريطة المملكة العربية السعودية وعليها بصمات الأطفال</title>
+            <defs>
+              <symbol id="fp-glyph" viewBox="0 0 100 120">
+                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="7.5">
+                  <path d="M50 12c-21 0-33 15-33 33v18c0 12-3 20-7 28"/>
+                  <path d="M50 26c-14 0-20 9-20 19v20c0 14-4 22-8 29"/>
+                  <path d="M50 40c-7 0-8 6-8 12v24c0 12-3 18-6 24"/>
+                  <path d="M50 12c21 0 33 15 33 33v14c0 10 2 18 5 26"/>
+                  <path d="M50 26c14 0 20 9 20 19v18c0 12 2 20 5 27"/>
+                  <path d="M50 40c7 0 8 6 8 12v20c0 11 1 17 4 24"/>
+                  <path d="M50 54c0 10 0 26-1 36"/>
+                </g>
+              </symbol>
+              <clipPath id="landClip">
+                <path d="M40.9 162.2 L90.9 133.3 L136.4 88.9 L180.9 48.9 L218.2 42.2 L234.1 37.8 L290.9 48.9 L327.3 66.7 L368.2 84.4 L431.8 124.4 L486.4 168.9 L540.9 171.1 L568.2 173.3 L611.4 177.8 L622.7 198.7 L654.5 197.8 L665.9 220 L672.7 235.6 L709.1 257.8 L736.4 280 L729.5 295.6 L743.2 313.3 L754.5 324.4 L763.6 365.3 L785.5 372.4 L800 374.2 L800.9 395.6 L845.5 394.7 L909.1 426.7 L963.6 457.8 L986.4 488.9 L968.2 551.1 L963.6 577.8 L886.4 604.4 L818.2 622.2 L750 631.1 L681.8 640 L618.2 684.4 L590.9 693.3 L500 693.3 L427.3 693.3 L418.2 724.4 L400 737.8 L388.6 693.3 L368.2 657.8 L354.5 631.1 L331.8 600 L315.9 580 L272.7 537.8 L250 528.9 L231.8 513.3 L229.5 488.9 L222.7 464.4 L200 426.7 L181.8 404.4 L161.4 391.1 L145.5 375.6 L129.5 351.1 L118.2 328.9 L102.3 302.2 L90.9 283.6 L70.5 266.7 L52.3 246.7 L43.2 228.9 L36.4 220 L28.2 197.8 L34.1 175.6 Z"/>
+              </clipPath>
+            </defs>
+
+            <path id="ksa-land" fill="#F1EBDA" stroke="#2E7D52" stroke-width="5.5" stroke-linejoin="round"
+              d="M40.9 162.2 L90.9 133.3 L136.4 88.9 L180.9 48.9 L218.2 42.2 L234.1 37.8 L290.9 48.9 L327.3 66.7 L368.2 84.4 L431.8 124.4 L486.4 168.9 L540.9 171.1 L568.2 173.3 L611.4 177.8 L622.7 198.7 L654.5 197.8 L665.9 220 L672.7 235.6 L709.1 257.8 L736.4 280 L729.5 295.6 L743.2 313.3 L754.5 324.4 L763.6 365.3 L785.5 372.4 L800 374.2 L800.9 395.6 L845.5 394.7 L909.1 426.7 L963.6 457.8 L986.4 488.9 L968.2 551.1 L963.6 577.8 L886.4 604.4 L818.2 622.2 L750 631.1 L681.8 640 L618.2 684.4 L590.9 693.3 L500 693.3 L427.3 693.3 L418.2 724.4 L400 737.8 L388.6 693.3 L368.2 657.8 L354.5 631.1 L331.8 600 L315.9 580 L272.7 537.8 L250 528.9 L231.8 513.3 L229.5 488.9 L222.7 464.4 L200 426.7 L181.8 404.4 L161.4 391.1 L145.5 375.6 L129.5 351.1 L118.2 328.9 L102.3 302.2 L90.9 283.6 L70.5 266.7 L52.3 246.7 L43.2 228.9 L36.4 220 L28.2 197.8 L34.1 175.6 Z"/>
+
+            <g id="ksa-regions" clip-path="url(#landClip)">
+              <path d="M232 60 L300 230 L250 400 L150 430"/>
+              <path d="M300 230 L520 200 L560 330 L470 470"/>
+              <path d="M520 200 L640 240 L700 300"/>
+              <path d="M560 330 L760 330 L830 420"/>
+              <path d="M250 400 L470 470 L520 600"/>
+              <path d="M470 470 L700 480 L780 560"/>
+              <path d="M520 600 L700 620 L760 690"/>
+              <path d="M150 430 L260 520 L330 610 L400 700"/>
+              <path d="M700 480 L900 470"/>
+              <path d="M260 520 L520 600"/>
+            </g>
+
+            <g id="print-layer"></g>
+          </svg>
+        </div>
+
+        <aside class="map-aside">
+          <div class="panel panel-note" id="map-note">
+            <svg class="panel-emblem" viewBox="0 0 64 60" aria-hidden="true">
+              <path d="M32 4c-3 8-3 14-1 20-4-3-8-4-12-3 4 3 7 7 9 12-5-1-9 0-12 3 5 0 9 2 12 5-3 3-4 7-3 11 3-3 7-5 11-5-1 4 0 8 2 11 2-3 3-7 2-11 4 0 8 2 11 5 1-4 0-8-3-11 3-3 7-5 12-5-3-3-7-4-12-3 2-5 5-9 9-12-4-1-8 0-12 3 2-6 2-12-1-20Z" fill="currentColor"/>
+            </svg>
+            <p class="panel-txt" id="map-note-txt">كل بصمة حكاية طفل ..<br>وكل طفل أملٌ لوطننا</p>
+          </div>
+
+          <div class="panel panel-tally">
+            <svg class="tally-fp" viewBox="0 0 100 120" aria-hidden="true"><use href="#fp-glyph"/></svg>
+            <div>
+              <p class="tally-lbl">عدد البصمات</p>
+              <p class="tally-num num" id="print-count">٠</p>
+            </div>
+          </div>
+
+          <button class="btn btn-solid btn-block" id="btn-to-share" type="button">
+            <span class="btn-arrow" aria-hidden="true">←</span> شاركنا كلمتك
+          </button>
+        </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────── شاشة ٤: المشاركة ───────── -->
+    <section class="view" id="v-share" aria-label="شاركنا" hidden>
+      <div class="view-in">
+        <form class="sheet" id="share-form" novalidate>
+          <div class="segmented" role="tablist" aria-label="نوع المشاركة">
+            <button type="button" class="seg is-on" role="tab" aria-selected="true" data-kind="vision">رؤيتي لوطن مزدهر</button>
+            <button type="button" class="seg" role="tab" aria-selected="false" data-kind="text">عبارة وطنية</button>
+            <button type="button" class="seg" role="tab" aria-selected="false" data-kind="audio">رسالة صوتية</button>
+            <button type="button" class="seg" role="tab" aria-selected="false" data-kind="photo">صورة طفلي</button>
+          </div>
+
+          <div class="grid-2">
+            <label class="fld">
+              <span class="fld-lbl">الاسم</span>
+              <input class="input" id="share-name" type="text" maxlength="40" required>
+            </label>
+            <label class="fld">
+              <span class="fld-lbl">الصفة</span>
+              <select class="input" id="share-rel">
+                <option value="طفل">طفل / طفلة</option>
+                <option value="ولي أمر">ولي أمر</option>
+                <option value="معلمة">معلمة</option>
+                <option value="مديرة">مديرة</option>
+                <option value="موظفة">موظفة</option>
+                <option value="متدربة">متدربة</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="pane" data-pane="vision">
+            <p class="pane-q">ما رؤيتك لوطنٍ مزدهر؟</p>
+            <textarea class="input area" id="vision-text" rows="3" maxlength="280" placeholder="أرى وطني…"></textarea>
+            <span class="counter num" data-count-for="vision-text">٠ / ٢٨٠</span>
+          </div>
+
+          <div class="pane" data-pane="text" hidden>
+            <p class="pane-q">عبارتك لوطنك</p>
+            <textarea class="input area" id="share-text" rows="3" maxlength="280" placeholder="كل عام ووطني بخير…"></textarea>
+            <span class="counter num" data-count-for="share-text">٠ / ٢٨٠</span>
+          </div>
+
+          <div class="pane" data-pane="audio" hidden>
+            <p class="pane-q">سجّل رسالتك الصوتية</p>
+            <div class="rec">
+              <button type="button" class="rec-btn" id="rec-btn" aria-label="ابدأ التسجيل">
+                <span class="rec-dot" aria-hidden="true"></span>
+              </button>
+              <div class="rec-meta">
+                <p class="rec-state" id="rec-state">اضغط للتسجيل</p>
+                <p class="rec-time num" id="rec-time">٠:٠٠</p>
+              </div>
+              <div class="rec-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+            <audio id="rec-play" controls hidden></audio>
+          </div>
+
+          <div class="pane" data-pane="photo" hidden>
+            <p class="pane-q">صورة طفلك بزيّ الوطن</p>
+            <label class="drop" for="photo-input">
+              <span class="drop-ico" aria-hidden="true">＋</span>
+              <span class="drop-txt">اختر صورة</span>
+              <span class="hint">JPG أو PNG — حتى ٥ ميجابايت</span>
+            </label>
+            <input type="file" id="photo-input" accept="image/*" hidden>
+            <img class="photo-prev" id="photo-preview" alt="معاينة الصورة المختارة" hidden>
+          </div>
+
+          <div class="sheet-foot">
+            <button class="ghost-link" id="skip-share" type="button">تخطّي</button>
+            <button class="btn btn-solid" type="submit" id="share-submit">
+              <span class="btn-arrow" aria-hidden="true">←</span> أرسل مشاركتي
+            </button>
+          </div>
+          <p class="msg" id="share-msg" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ───────── شاشة ٥: الجدار ───────── -->
+    <section class="view" id="v-wall" aria-label="جدار المبادرة" hidden>
+      <div class="view-in wall-view">
+        <div class="wall-bar">
+          <p class="wall-title"><span class="live" aria-hidden="true"></span> جدار المبادرة</p>
+          <div class="filters" role="group" aria-label="تصفية">
+            <button class="chip is-on" type="button" data-filter="all">الكل</button>
+            <button class="chip" type="button" data-filter="vision">الرؤى</button>
+            <button class="chip" type="button" data-filter="text">العبارات</button>
+            <button class="chip" type="button" data-filter="audio">الأصوات</button>
+            <button class="chip" type="button" data-filter="photo">الصور</button>
+          </div>
+        </div>
+        <div class="wall" id="wall"></div>
+        <p class="wall-empty" id="wall-empty" hidden>لا توجد مشاركات بعد — كن أول المشاركين</p>
+      </div>
+    </section>
+
+    <!-- ───────── شاشة ٦: عن الروضة ───────── -->
+    <section class="view" id="v-about" aria-label="عن روضتنا" hidden>
+      <div class="view-in">
+        <div class="sheet about">
+          <figure class="about-fig">
+            <img id="school-photo" src="assets/img/school.jpg"
+                 data-fallback="assets/img/school-placeholder.svg"
+                 alt="مبنى روضة الأطفال النموذجية">
+            <figcaption>روضة الأطفال النموذجية</figcaption>
+          </figure>
+          <div class="about-body">
+            <h2 class="about-h">عن روضتنا</h2>
+            <div class="vm">
+              <h3>الرؤية</h3>
+              <p>بناء طفل واثق، مبدع، معتزّ بقيمه ووطنه، في بيئة تعليمية آمنة ومحفّزة.</p>
+            </div>
+            <div class="vm vm-alt">
+              <h3>الرسالة</h3>
+              <p>نعمل لبناء رواد في المجتمع علميًا وفكريًا وأخلاقيًا، وتنمية قدراتهم على الابتكار والإبداع.</p>
+            </div>
+            <p class="about-cred">جمعية فتاة الخليج الخيرية النسائية <br>مبادرة مديرة الروضة: ملاك المهاجري</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════ الأزرار العائمة ══════════ -->
+  <button class="fab fab-home" id="fab-home" type="button" title="الصفحة الرئيسية">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/>
+    </svg>
+    <span class="sr">الصفحة الرئيسية</span>
+  </button>
+
+  <button class="fab fab-new" id="fab-new" type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20 12a8 8 0 1 1-2.5-5.8"/><path d="M20 4v4.5h-4.5"/>
+    </svg>
+    طفل جديد
+  </button>
+
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

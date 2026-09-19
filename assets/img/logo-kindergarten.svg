@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 360" role="img" aria-label="جمعية فتاة الخليج — مركز الطفولة المبكرة">
+  <title>جمعية فتاة الخليج — مركز الطفولة المبكرة</title>
+  <defs>
+    <linearGradient id="kgSky" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%"   stop-color="#1C3F72"/>
+      <stop offset="42%"  stop-color="#3D7FC0"/>
+      <stop offset="78%"  stop-color="#2B5E9A"/>
+      <stop offset="100%" stop-color="#16325C"/>
+    </linearGradient>
+    <linearGradient id="kgBand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3D7FC0"/>
+      <stop offset="100%" stop-color="#1C3F72"/>
+    </linearGradient>
+    <radialGradient id="kgGlow" cx="0.5" cy="0.62" r="0.55">
+      <stop offset="0%" stop-color="#BBD9F2" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#BBD9F2" stop-opacity="0"/>
+    </radialGradient>
+    <path id="kgArchInner" d="M70 266 L70 146 A100 100 0 0 1 270 146 L270 266 Z"/>
+    <clipPath id="kgClip"><use href="#kgArchInner"/></clipPath>
+  </defs>
+
+  <!-- القوس الخارجي -->
+  <path d="M52 280 L52 144 A118 118 0 0 1 288 144 L288 280 Z"
+        fill="#C9B28D" stroke="#6E4A2F" stroke-width="7" stroke-linejoin="round"/>
+
+  <!-- داخل القوس -->
+  <use href="#kgArchInner" fill="url(#kgSky)"/>
+  <use href="#kgArchInner" fill="url(#kgGlow)"/>
+
+  <g clip-path="url(#kgClip)">
+    <!-- وجه الأم -->
+    <path d="M254 268
+             C252 214 240 184 219 163
+             C206 150 202 134 210 118
+             C217 104 212 90 199 87
+             C188 84 179 91 177 102
+             C174 118 182 129 178 144
+             C173 163 160 176 158 198
+             C156 222 162 248 166 268 Z"
+          fill="#F2F7FC"/>
+    <!-- ملامح خفيفة للأم -->
+    <path d="M196 116 q10 3 13 11" stroke="#9FC2E0" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M186 133 q9 5 4 13"   stroke="#9FC2E0" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- وجه الطفلة -->
+    <path d="M92 268
+             C92 232 100 209 114 194
+             C124 184 127 173 122 162
+             C117 152 122 142 131 141
+             C140 140 146 147 145 156
+             C144 167 139 174 142 183
+             C146 196 135 210 128 226
+             C121 242 120 256 120 268 Z"
+          fill="#EAF2FA"/>
+    <path d="M128 158 q7 2 9 8" stroke="#9FC2E0" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+
+    <!-- نجيمات خفيفة في الخلفية -->
+    <g fill="#CFE4F7" opacity=".7">
+      <circle cx="98" cy="118" r="3"/>
+      <circle cx="120" cy="96" r="2.2"/>
+      <circle cx="244" cy="104" r="2.6"/>
+      <circle cx="262" cy="132" r="2"/>
+    </g>
+  </g>
+
+  <!-- نصوص جانبية صغيرة على القوس -->
+  <text x="66"  y="196" font-family="Noto Kufi Arabic, Tahoma, sans-serif" font-size="11" font-weight="700"
+        fill="#6E4A2F" transform="rotate(-90 66 196)" text-anchor="middle">تربوية</text>
+  <text x="274" y="196" font-family="Noto Kufi Arabic, Tahoma, sans-serif" font-size="11" font-weight="700"
+        fill="#6E4A2F" transform="rotate(90 274 196)" text-anchor="middle">تعليمية</text>
+
+  <!-- اسم المركز أعلى القوس -->
+  <text x="170" y="74" text-anchor="middle" font-family="Noto Kufi Arabic, Tahoma, sans-serif"
+        font-size="21" font-weight="700" fill="#6E4A2F">مركز الطفولة المبكرة</text>
+
+  <!-- الشريط السفلي -->
+  <path d="M26 276 L314 276 L296 328 L44 328 Z"
+        fill="url(#kgBand)" stroke="#12294C" stroke-width="4" stroke-linejoin="round"/>
+  <text x="170" y="310" text-anchor="middle" font-family="Noto Kufi Arabic, Tahoma, sans-serif"
+        font-size="27" font-weight="700" fill="#FFFFFF">جمعية فتاة الخليج</text>
+  <text x="170" y="348" text-anchor="middle" font-family="Noto Kufi Arabic, Tahoma, sans-serif"
+        font-size="14" font-weight="500" fill="#6E4A2F">إصدارات تربوية</text>
+</svg>
