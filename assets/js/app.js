@@ -108,7 +108,7 @@
   var Music = (function () {
     var on = false, el = null, ctx = null, master = null, timer = 0, step = 0;
     var mode = 'off', track = null, probing = null;
-    var VOL = 0.22;
+    var VOL = 0.60;
 
     try { on = localStorage.getItem('nd96.music') === 'on'; } catch (e) {}
 
